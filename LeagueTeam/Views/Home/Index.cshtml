@@ -1,0 +1,16 @@
+﻿@model LeagueTeam.ViewModel.IndexViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Number of Teams: @Model.TeamCount</h2>
+        <p>@Html.ActionLink("View All Teams", "Index", "Team")</p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Number of Players: @Model.PlayerCount</h2>
+        <p>@Html.ActionLink("View All Players", "Index", "Players")</p>
+    </div>
+</div>
