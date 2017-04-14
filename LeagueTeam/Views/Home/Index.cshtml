@@ -14,3 +14,14 @@
         <p>@Html.ActionLink("View All Players", "Index", "Players")</p>
     </div>
 </div>
+
+
+@using (Html.BeginForm())
+{
+
+    <div>
+        @Html.DropDownList("TeamName", ViewBag.Teams as IEnumerable<SelectListItem>);
+    </div>
+    <button>Sbmit</button>
+
+}
