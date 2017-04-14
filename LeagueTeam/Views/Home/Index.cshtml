@@ -11,6 +11,7 @@
 
     <div class="col-md-6">
         <h2>Number of Players: @Model.PlayerCount</h2>
-        <p>@Html.ActionLink("View All Players", "Index", "Players")</p>
+        <p>@Html.ActionLink("View All Players", "Index", "Player")</p>
+        <p>@Html.ActionLink("Add a Player", "Add", "Player", null,new { @class = "btn btn-default" })</p>
     </div>
 </div>

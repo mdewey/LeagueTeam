@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using LeagueTeam.ViewModel;
 using System.Data.SqlClient;
+using LeagueTeam.Models;
 
 namespace LeagueTeam.Services
 {
@@ -16,7 +17,24 @@ namespace LeagueTeam.Services
             this._ConnectionString = connectionString;
         }
 
+        public IEnumerable<Team> GetAllTeams()
+        {
+            var rv = new List<Team>();
+            using (var connection = new SqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Teams";
+                var cmd = new SqlCommand(query, connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    rv.Add(new Team(reader));
+                }
 
+                connection.Close();
+            }
+            return rv;
+        }
         public IndexViewModel GetCountOfPlayersAndTeams()
         {
             var rv = new IndexViewModel();
