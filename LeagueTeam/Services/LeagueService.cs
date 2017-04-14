@@ -17,6 +17,31 @@ namespace LeagueTeam.Services
             this._ConnectionString = connectionString;
         }
 
+        public IEnumerable<Player> GetAllPlayers(bool includeTeamData = true)
+        {
+            var rv = new List<Player>();
+            using (var connection = new SqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Players";
+                if (includeTeamData)
+                {
+                    query += " JOIN Teams ON Players.TeamId = Teams.Id";
+                }
+                var cmd = new SqlCommand(query, connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    rv.Add(new Player(reader));
+                }
+
+                connection.Close();
+            }
+            return rv;
+
+        }
+
+
         public IEnumerable<Team> GetAllTeams()
         {
             var rv = new List<Team>();
